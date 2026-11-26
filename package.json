@@ -18,7 +18,7 @@
     "leaflet.markercluster": "^1.5.3",
     "@capacitor/core": "^6.1.2",
     "@capacitor/android": "^6.1.2",
-    "@capacitor/ios": "^6.1.2",
+    "@capacitor/ios": "^8.6.2",
     "@capacitor-community/background-geolocation": "^1.2.20"
   },
   "devDependencies": {
