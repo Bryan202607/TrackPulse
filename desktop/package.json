@@ -1,0 +1,18 @@
+{
+  "name": "trackpulse-desktop",
+  "version": "0.7.0",
+  "private": true,
+  "description": "TrackPulse pour Windows",
+  "author": "TrackPulse",
+  "main": "main.cjs",
+  "scripts": { "start": "electron .", "dist": "electron-builder --win --publish never" },
+  "devDependencies": { "electron": "latest", "electron-builder": "latest" },
+  "build": {
+    "appId": "com.entreprise.trackpulse",
+    "productName": "TrackPulse",
+    "directories": { "output": "release" },
+    "files": ["main.cjs", "app/**"],
+    "win": { "target": ["nsis", "portable"] },
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true }
+  }
+}
