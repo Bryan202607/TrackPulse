@@ -52,4 +52,4 @@ jobs:
           echo "Artefact introuvable après 2 minutes."
           exit 1
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
