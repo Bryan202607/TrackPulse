@@ -33,6 +33,8 @@ export default function Fleet({ user, onSignOut }) {
   useEffect(() => subscribeOps(force), [])
   useEffect(() => {
     const f = (e) => {
+      const typing = ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)
+      if (e.key === '/' && !typing) { e.preventDefault(); setOpen(true); setTimeout(() => document.querySelector('.search')?.focus(), 0); return }
       if (e.key !== 'Escape') return
       if (sheet) setSheet(null)
       else if (selectedId) { setSelectedId(null); setReplay(null) }
@@ -42,6 +44,8 @@ export default function Fleet({ user, onSignOut }) {
   }, [sheet, selectedId])
   useEffect(() => { let off = () => {}; startSource(user).then((f) => { off = f }); return () => off() }, [user])
 
+  // Onglet du navigateur : le nombre d'alertes s'affiche même si la fenêtre est en arrière-plan.
+  useEffect(() => { document.title = ops.alerts.length ? `(${ops.alerts.length}) TrackPulse` : 'TrackPulse' })
   const select = (id) => { setSelectedId(id); setReplay(null); setFocus({ id, n: Date.now() }) }
   const doExport = (d) => { exportTrail(d); audit('Export du trajet', d.name, user.email) }
   const doZone = (d) => {
