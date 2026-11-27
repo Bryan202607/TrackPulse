@@ -2,12 +2,13 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   // Sur GitHub Pages le site vit dans /TrackPulse/ (valeur fournie par .github/workflows/deploy.yml).
   base: process.env.VITE_BASE || '/',
   plugins: [
     react(),
     VitePWA({
+      disable: mode === 'electron', // pas de service worker dans l'appli de bureau
       registerType: 'autoUpdate',
       manifest: {
         name: 'TrackPulse',
@@ -22,4 +23,4 @@ export default defineConfig({
       }
     })
   ]
-})
+}))

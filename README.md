@@ -88,3 +88,15 @@ L'admin voit tous les appareils et approuve les demandes de déconnexion ou de s
 - `deploy.yml` en deux étapes (compiler, puis publier), avec `actions: read` et une attente de l'artefact. Corrige l'erreur « No artifacts named github-pages » (liste d'artefacts de GitHub parfois en retard juste après l'envoi).
 - Pour relancer : **Re-run failed jobs** (ne relance que la publication) ou **Run workflow**. Éviter **Re-run all jobs** sur l'ancienne structure.
 - Fichiers à remplacer sur GitHub : `.github/workflows/deploy.yml` et `vite.config.js` (ligne `base`).
+
+## Version 0.7 : confort sur PC
+- Clavier : `/` ouvre la recherche, `↑` `↓` parcourent la liste des appareils, `Échap` ferme le panneau.
+- Nombre d'alertes dans le titre de l'onglet, barres de défilement fines, panneaux plus larges sur grand écran.
+- Installation comme appli de bureau : dans Edge ou Chrome, icône « Installer » dans la barre d'adresse (sur le site publié en https).
+- Fichiers modifiés : `src/components/Sidebar.jsx`, `src/pages/Fleet.jsx`, `src/styles.css`.
+
+## Version 0.8 : application Windows (.exe)
+- Sur GitHub : **Actions**, **Application PC (.exe)**, **Run workflow**. Au bout de quelques minutes, ouvrez l'exécution : section **Artifacts**, **TrackPulse-Windows** (un zip avec l'installateur et une version portable).
+- Windows peut afficher « Windows a protégé votre ordinateur » : l'application n'est pas signée (une signature de code est payante). Cliquer sur **Informations complémentaires**, puis **Exécuter quand même**.
+- L'application de bureau est en mode démo (flotte simulée) tant qu'aucune clé Firebase n'est fournie à la compilation.
+- Test local : `npx vite build --mode electron --base=./ --outDir desktop/app --emptyOutDir`, puis dans `desktop` : `npm install` et `npm start`.

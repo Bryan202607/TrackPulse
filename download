@@ -8,3 +8,7 @@ dist
 .DS_Store
 android/app/build
 ios/App/Pods
+
+desktop/app
+desktop/release
+desktop/node_modules
