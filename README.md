@@ -83,3 +83,8 @@ L'admin voit tous les appareils et approuve les demandes de déconnexion ou de s
 - Sur GitHub : **Settings** → **Pages** → **Source : GitHub Actions**. Chaque envoi sur `main` republie l'aperçu à l'adresse `https://<compte>.github.io/TrackPulse/`.
 - L'aperçu tourne en mode démo (flotte simulée, aucune donnée réelle, aucune clé Firebase).
 - GitHub Pages sur un dépôt privé demande un forfait payant. Sinon : GitHub Codespaces (bouton **Code** → **Codespaces**), puis `npm install` et `npm run dev`.
+
+## Version 0.6.5 : publication Pages fiabilisée
+- `deploy.yml` en deux étapes (compiler, puis publier), avec `actions: read` et une attente de l'artefact. Corrige l'erreur « No artifacts named github-pages » (liste d'artefacts de GitHub parfois en retard juste après l'envoi).
+- Pour relancer : **Re-run failed jobs** (ne relance que la publication) ou **Run workflow**. Éviter **Re-run all jobs** sur l'ancienne structure.
+- Fichiers à remplacer sur GitHub : `.github/workflows/deploy.yml` et `vite.config.js` (ligne `base`).
