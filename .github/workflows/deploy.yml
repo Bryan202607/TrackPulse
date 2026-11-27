@@ -3,19 +3,16 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# Une publication en cours n'est jamais interrompue par une autre.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
-  deploy:
+  # Étape 1 : compiler le site et l'envoyer comme artefact.
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -28,5 +25,31 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+  # Étape 2 : publier. Étape séparée pour pouvoir la relancer seule (« Re-run failed jobs »).
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+      actions: read
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # GitHub met parfois quelques secondes à lister l'artefact : on attend jusqu'à 2 minutes.
+      - name: Attendre la liste des artefacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for i in $(seq 1 12); do
+            n=$(gh api "repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts?name=github-pages" --jq '.total_count' || echo 0)
+            echo "Essai $i : $n artefact(s) trouvé(s)"
+            if [ "$n" -ge 1 ]; then exit 0; fi
+            sleep 10
+          done
+          echo "Artefact introuvable après 2 minutes."
+          exit 1
       - id: deployment
         uses: actions/deploy-pages@v4
