@@ -63,7 +63,7 @@ export default function Fleet({ user, onSignOut }) {
       <MapView hidden={weekend} selectedId={selectedId} onSelect={select} focus={focus} replay={replay} />
       <div className="glass topbar">
         <button className="icon" onClick={() => setOpen(!open)} aria-label="Afficher ou masquer la liste">☰</button>
-        <strong>Flotte</strong>
+        <strong>TrackPulse</strong>
         <nav className="tabs">{tabs.map(([k, l]) => <button key={k} className={sheet === k ? 'on' : ''} onClick={() => setSheet(sheet === k ? null : k)}>{l}</button>)}</nav>
         <span className="muted mono who">{user.email} · {isAdmin ? 'admin' : 'membre'}</span>
         <button className="icon txt" onClick={async () => { await Promise.race([audit('Déconnexion', '', user.email), new Promise((r) => setTimeout(r, 1500))]); onSignOut() }}>Quitter</button>

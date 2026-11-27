@@ -41,7 +41,7 @@ export default function Tracker({ deviceId, onGone }) {
       if (native) {
         watchId = 'pending'
         BG.addWatcher(
-          { backgroundTitle: 'Flotte', backgroundMessage: 'Suivi actif pendant les jours ouvrés', requestPermissions: true, stale: false, distanceFilter: 5 },
+          { backgroundTitle: 'TrackPulse', backgroundMessage: 'Suivi actif pendant les jours ouvrés', requestPermissions: true, stale: false, distanceFilter: 5 },
           (loc) => loc && onPos({ ...loc, heading: loc.bearing })
         ).then((id) => { if (watchId === 'pending') watchId = id; else BG.removeWatcher({ id }) })
       } else if ('geolocation' in navigator) {

@@ -26,7 +26,7 @@ export default function Login({ onLogin }) {
   return (
     <div className="login">
       <section className="login-form">
-        <div className="brand"><span className="logo" />Flotte</div>
+        <div className="brand"><span className="logo" />TrackPulse</div>
         <form onSubmit={submit}>
           <h1>{mode === 'register' ? 'Créer un compte' : 'Connexion à votre espace'}</h1>
           <p className="muted">{DEMO ? 'Mode démo : tout identifiant est accepté. Un e-mail contenant « admin » donne le rôle administrateur.' : 'Accès réservé aux équipes autorisées.'}</p>

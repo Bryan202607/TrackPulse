@@ -1,4 +1,4 @@
-# Suivi des appareils (PWA React + Firebase)
+# TrackPulse (PWA React + Firebase)
 
 ## Installation
 1. `npm install`
@@ -68,3 +68,8 @@ L'admin voit tous les appareils et approuve les demandes de déconnexion ou de s
 - Firebase passé en 13.x (corrige les dépendances vulnérables signalées par `npm audit`).
 - CI : l'audit bloquant ne porte que sur les dépendances de production ; l'audit complet reste informatif.
 - Dépôt GitHub : ne pas envoyer de dossier `.git` ni `.config`. Envoyer les fichiers du projet, ou utiliser GitHub Desktop.
+
+## Version 0.6.2
+- Dependabot : plus de mises à jour majeures automatiques (une seule bascule de `react-dom` en 19 casse l'installation, car `react` et `react-leaflet` restent en 18). Les mises à jour mineures sont regroupées en une seule demande.
+- Après un premier `npm install` sur votre ordinateur, commitez `package-lock.json`, puis remplacez `npm install` par `npm ci` dans `.github/workflows/ci.yml` pour des tests reproductibles.
+- Les failles restantes de `npm audit` viennent de `@capacitor/cli` (outil de développement, via `tar`) : sans effet sur l'appli en production. La bascule vers Capacitor 7 se fera à part, car elle demande de changer toute la famille `@capacitor/*` ensemble.

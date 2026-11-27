@@ -8,8 +8,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Suivi des appareils',
-        short_name: 'Suivi',
+        name: 'TrackPulse',
+        short_name: 'TrackPulse',
         theme_color: '#0f4c5c',
         background_color: '#f6f8f8',
         display: 'standalone',
