@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { STATUS, ago } from '../lib/format'
 
 export const Signal = ({ n }) => (
@@ -8,9 +9,18 @@ const FILTERS = [['all', 'Tous'], ['moving', 'En mouvement'], ['idle', 'À l’a
 export default function Sidebar({ devices, loading, query, setQuery, filter, setFilter, selectedId, onSelect }) {
   const count = (k) => (k === 'all' ? devices.length : devices.filter((d) => d.status === k).length)
   const list = devices.filter((d) => (filter === 'all' || d.status === filter) && `${d.name} ${d.user} ${d.id}`.toLowerCase().includes(query.toLowerCase()))
+  // Clavier (PC) : ↑ ↓ pour parcourir la liste, l'appareil choisi reste visible.
+  const onKey = (e) => {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
+    e.preventDefault()
+    const i = list.findIndex((d) => d.id === selectedId)
+    const next = list[Math.min(list.length - 1, Math.max(0, i + (e.key === 'ArrowDown' ? 1 : -1)))]
+    if (next) onSelect(next.id)
+  }
+  useEffect(() => { document.querySelector('.item.on')?.scrollIntoView({ block: 'nearest' }) }, [selectedId])
   return (
-    <aside className="panel side">
-      <input className="search" placeholder="Rechercher un appareil, un utilisateur…" value={query} onChange={(e) => setQuery(e.target.value)} />
+    <aside className="panel side" onKeyDown={onKey}>
+      <input className="search" placeholder="Rechercher (touche /)" value={query} onChange={(e) => setQuery(e.target.value)} />
       <div className="filters">
         {FILTERS.map(([k, l]) => (
           <button key={k} className={filter === k ? 'on' : ''} onClick={() => setFilter(k)}>{l} <span className="mono">{loading ? '–' : count(k)}</span></button>
@@ -31,6 +41,7 @@ export default function Sidebar({ devices, loading, query, setQuery, filter, set
           </button>
         ))}
       </div>
+      <p className="hint"><kbd>/</kbd> chercher · <kbd>↑</kbd> <kbd>↓</kbd> parcourir · <kbd>Échap</kbd> fermer</p>
     </aside>
   )
 }
