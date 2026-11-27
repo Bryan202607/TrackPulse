@@ -78,3 +78,8 @@ L'admin voit tous les appareils et approuve les demandes de déconnexion ou de s
 - `npm audit` signalait 4 failles « high » dans la chaîne `firebase` → `@firebase/firestore` → `@grpc/grpc-js` : Firestore fige une ancienne version de `@grpc/grpc-js`, même dans firebase 13. Le champ `overrides` de `package.json` impose une version corrigée. Ce module ne sert que côté Node : l'appli (navigateur) n'est pas concernée.
 - Ne PAS lancer `npm audit fix --force` : il rétrograderait Firebase en 9.14.0.
 - Nettoyage du dépôt : supprimer `.config`, `logs`, `objects` et tout autre élément issu de l'ancien dossier `.git` (`refs`, `hooks`, `info`, `branches`, `HEAD`, `config`, `description`, `COMMIT_EDITMSG`, `index`).
+
+## Aperçu en ligne (GitHub Pages)
+- Sur GitHub : **Settings** → **Pages** → **Source : GitHub Actions**. Chaque envoi sur `main` republie l'aperçu à l'adresse `https://<compte>.github.io/TrackPulse/`.
+- L'aperçu tourne en mode démo (flotte simulée, aucune donnée réelle, aucune clé Firebase).
+- GitHub Pages sur un dépôt privé demande un forfait payant. Sinon : GitHub Codespaces (bouton **Code** → **Codespaces**), puis `npm install` et `npm run dev`.

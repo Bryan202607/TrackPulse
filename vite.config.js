@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  // Sur GitHub Pages le site vit dans /TrackPulse/ (valeur fournie par .github/workflows/deploy.yml).
+  base: process.env.VITE_BASE || '/',
   plugins: [
     react(),
     VitePWA({
