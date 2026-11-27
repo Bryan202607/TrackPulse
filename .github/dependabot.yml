@@ -1,5 +1,24 @@
 version: 2
 updates:
-  - { package-ecosystem: npm, directory: "/", schedule: { interval: weekly } }
-  - { package-ecosystem: npm, directory: "/functions", schedule: { interval: weekly } }
-  - { package-ecosystem: github-actions, directory: "/", schedule: { interval: weekly } }
+  # Les mises à jour majeures (react 19, vite 7...) se font à la main : elles cassent l'installation si elles sont faites une par une.
+  - package-ecosystem: npm
+    directory: "/"
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 3
+    groups:
+      minor-and-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+  - package-ecosystem: npm
+    directory: "/functions"
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 2
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule: { interval: weekly }
