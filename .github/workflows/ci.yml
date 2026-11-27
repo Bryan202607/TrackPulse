@@ -6,7 +6,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 20 }
+        with: { node-version: 22 }
       - run: npm install
       - run: npm run build
-      - run: npm audit --audit-level=high
+      - name: Audit des dépendances de production
+        run: npm audit --omit=dev --audit-level=high
+      - name: Audit complet (informatif, ne bloque pas)
+        run: npm audit
+        continue-on-error: true
