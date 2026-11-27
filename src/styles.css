@@ -95,3 +95,14 @@ button:active:not(:disabled) { transform: scale(.97); }
 @media (prefers-reduced-motion: reduce) { .panel { animation: fade 200ms ease both; } button:active:not(:disabled), .fitbtn:active:not(:disabled) { transform: none; } .skel { animation: none; } }
 @media (prefers-reduced-transparency: reduce) { .glass { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; } }
 @media (prefers-contrast: more) { .glass, .panel { background: #fff; border-color: var(--ink); } .muted { color: #334155; } }
+/* v0.7 : confort sur PC */
+.list, .sheet-body, .drawer { scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+.list::-webkit-scrollbar, .sheet-body::-webkit-scrollbar, .drawer::-webkit-scrollbar { width: 8px; }
+.list::-webkit-scrollbar-thumb, .sheet-body::-webkit-scrollbar-thumb, .drawer::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+kbd { font: 500 11px var(--mono); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: #fff; color: var(--ink); }
+.hint { display: none; margin: 0; padding: 8px 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+@media (hover: hover) and (min-width: 1100px) { .hint { display: block; } }
+@media (min-width: 1500px) {
+  .panel.side, .panel.drawer { width: 380px; }
+  .sheet { left: 404px; width: min(560px, calc(100% - 808px)); }
+}
