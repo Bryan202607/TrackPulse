@@ -73,3 +73,8 @@ L'admin voit tous les appareils et approuve les demandes de déconnexion ou de s
 - Dependabot : plus de mises à jour majeures automatiques (une seule bascule de `react-dom` en 19 casse l'installation, car `react` et `react-leaflet` restent en 18). Les mises à jour mineures sont regroupées en une seule demande.
 - Après un premier `npm install` sur votre ordinateur, commitez `package-lock.json`, puis remplacez `npm install` par `npm ci` dans `.github/workflows/ci.yml` pour des tests reproductibles.
 - Les failles restantes de `npm audit` viennent de `@capacitor/cli` (outil de développement, via `tar`) : sans effet sur l'appli en production. La bascule vers Capacitor 7 se fera à part, car elle demande de changer toute la famille `@capacitor/*` ensemble.
+
+## Version 0.6.3
+- `npm audit` signalait 4 failles « high » dans la chaîne `firebase` → `@firebase/firestore` → `@grpc/grpc-js` : Firestore fige une ancienne version de `@grpc/grpc-js`, même dans firebase 13. Le champ `overrides` de `package.json` impose une version corrigée. Ce module ne sert que côté Node : l'appli (navigateur) n'est pas concernée.
+- Ne PAS lancer `npm audit fix --force` : il rétrograderait Firebase en 9.14.0.
+- Nettoyage du dépôt : supprimer `.config`, `logs`, `objects` et tout autre élément issu de l'ancien dossier `.git` (`refs`, `hooks`, `info`, `branches`, `HEAD`, `config`, `description`, `COMMIT_EDITMSG`, `index`).

@@ -1,7 +1,7 @@
 {
   "name": "trackpulse",
   "private": true,
-  "version": "0.6.2",
+  "version": "0.6.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -26,5 +26,8 @@
     "vite": "^5.4.11",
     "vite-plugin-pwa": "^0.21.1",
     "@capacitor/cli": "^6.1.2"
+  },
+  "overrides": {
+    "@grpc/grpc-js": "^1.14.6"
   }
 }
