@@ -63,3 +63,8 @@ L'admin voit tous les appareils et approuve les demandes de déconnexion ou de s
 - Publier sur GitHub (créez d'abord un dépôt **privé** vide) :
   `git remote add origin https://github.com/<compte>/<depot>.git` puis `git push -u origin main`.
 - Après le premier `npm install`, commitez `package-lock.json`. Activez sur GitHub : Dependabot alerts, Secret scanning, protection de la branche `main`.
+
+## Version 0.6.1
+- Firebase passé en 13.x (corrige les dépendances vulnérables signalées par `npm audit`).
+- CI : l'audit bloquant ne porte que sur les dépendances de production ; l'audit complet reste informatif.
+- Dépôt GitHub : ne pas envoyer de dossier `.git` ni `.config`. Envoyer les fichiers du projet, ou utiliser GitHub Desktop.
