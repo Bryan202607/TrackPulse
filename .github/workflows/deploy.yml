@@ -22,7 +22,7 @@ jobs:
       - run: npm run build
         env:
           VITE_BASE: /TrackPulse/
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
   # Étape 2 : publier. Étape séparée pour pouvoir la relancer seule (« Re-run failed jobs »).
